@@ -1,0 +1,67 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Mar 17 22:56:34 2018
+
+@author: User
+"""
+
+file=open("census.csv","r")
+F=file.readlines()
+F=F[1:]
+stname=[]
+census2010pop=[]
+ctname=[]
+p0=[]
+p1=[]
+p2=[]
+p3=[]
+p4=[]
+p5=[]
+for l in F:
+    line=l.strip()
+    L=line.split(",")
+    stname.append(L[5])
+    census2010pop.append(int(L[7]))
+    ctname.append(L[6])
+    p0.append(int(L[9]))
+    p1.append(int(L[10]))
+    p2.append(int(L[11]))
+    p3.append(int(L[12]))
+    p4.append(int(L[13]))
+    p5.append(int(L[14]))
+
+file.close()
+
+
+def answer31(x):
+    c_st=[]
+    st_set=set(x)
+    st_set_list=list(st_set)
+    for i in st_set_list:
+        c_st.append(x.count(i))
+    data1=dict(zip(c_st,st_set_list))
+    return data1[max(c_st)]
+print(answer31(stname))
+
+def answer32(x,y):
+    data2=dict(zip(x,y))
+    x.sort(reverse=True)
+    ans=data2[x[0]],data2[x[1]],data2[x[2]]
+    return list(ans)
+    #return data2
+print(answer32(census2010pop,stname))
+
+def answer33(a,b,c,d,e,f,g):
+    p=zip(b,c,d,e,f,g)
+    p=list(p)
+    d_p=[]
+    for i in p:
+       d_p.append(abs(max(i)-min(i)))
+    data3=dict(zip(d_p,a))
+    return data3[max(d_p)]
+print(answer33(ctname,p0,p1,p2,p3,p4,p5))
+#%%
+from mglearn import plots
+plots.plot_2d_separator()
+#plot_2d_separator()
+    

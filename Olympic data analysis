@@ -1,0 +1,53 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Mar 16 23:10:33 2018
+
+@author: User
+"""
+
+file=open("olympics.csv","r")
+#list=file.readlines() #讀下一個list 裡面是許多string(而非list)
+line=""
+L=[]
+L0,L5,L10,L15=[],[],[],[]
+F=file.readlines()
+F=F[2:len(F)-1]
+for l in F:
+  line=l.strip()
+  L=line.split(",")
+  L0.append(L[0])
+  L5.append(int(L[5]))
+  L10.append(int(L[10]))
+  L15.append(int(L[15]))    
+file.close()
+
+def answer21(x,y):
+   data1=dict(zip(x,y))
+   return data1[max(x)]
+print(answer21(L5,L0))
+
+def answer22(x,y,z):
+    d=[]
+    i=0
+    while i< len(x):
+        d.append(abs(x[i]-y[i]))
+        i+=1
+    data2=dict(zip(d,z))
+    return data2[max(d)]
+print(answer22(L5,L10,L0))
+
+
+def answer23(x,y,w,z):
+    r=[]
+    z_=[]
+    i=0
+    while i< len(x):
+        if (x[i]>0)&(y[i]>0):
+            z_.append(z[i])
+            r.append((abs(x[i]-y[i]))/w[i])
+        i+=1
+    data3=dict(zip(r,z_))
+    return data3[max(r)]
+print(answer23(L5,L10,L15,L0))
+
+
